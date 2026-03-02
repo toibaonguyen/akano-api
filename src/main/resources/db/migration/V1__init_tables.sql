@@ -212,7 +212,7 @@ CREATE TABLE
     );
 
 CREATE TABLE 
-    t_order_statuses (
+    m_t_order_statuses (
         id          SMALLSERIAL PRIMARY KEY,
         code        VARCHAR(50) NOT NULL UNIQUE,
         name        VARCHAR(100) NOT NULL,
@@ -248,7 +248,7 @@ CREATE TABLE
     );
 
 CREATE TABLE 
-    order_statuses (
+    m_order_statuses (
         id          SMALLSERIAL PRIMARY KEY,
         code        VARCHAR(50) NOT NULL UNIQUE,
         name        VARCHAR(100) NOT NULL,
