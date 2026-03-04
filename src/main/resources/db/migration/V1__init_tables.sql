@@ -16,7 +16,7 @@ CREATE TABLE
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         created_by UUID NOT NULL,
         updated_by UUID NOT NULL
-    )
+    );
 
 CREATE TABLE 
     accounts(
