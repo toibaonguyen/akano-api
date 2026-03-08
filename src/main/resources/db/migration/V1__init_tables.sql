@@ -200,11 +200,8 @@ CREATE TABLE
 
 CREATE TABLE 
     t_order_statuses (
-        id          SMALLSERIAL PRIMARY KEY,
-        code        VARCHAR(50) NOT NULL UNIQUE,
-        name        VARCHAR(100) NOT NULL,
-        description TEXT,
-        is_active   BOOLEAN DEFAULT TRUE,
+        id          UUID PRIMARY KEY DEFAULT gen_random_uuid (),
+        m_status_id UUID NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         created_by UUID NOT NULL,
@@ -213,9 +210,8 @@ CREATE TABLE
 
 CREATE TABLE 
     m_t_order_statuses (
-        id          SMALLSERIAL PRIMARY KEY,
+        id          UUID PRIMARY KEY DEFAULT gen_random_uuid (),
         code        VARCHAR(50) NOT NULL UNIQUE,
-        name        VARCHAR(100) NOT NULL,
         description TEXT,
         is_active   BOOLEAN DEFAULT TRUE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -248,10 +244,19 @@ CREATE TABLE
     );
 
 CREATE TABLE 
+    order_statuses (
+        id          UUID PRIMARY KEY DEFAULT gen_random_uuid (),
+        m_status_id UUID NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        created_by UUID NOT NULL,
+        updated_by UUID NOT NULL
+    );
+
+CREATE TABLE 
     m_order_statuses (
-        id          SMALLSERIAL PRIMARY KEY,
+        id          UUID PRIMARY KEY DEFAULT gen_random_uuid (),
         code        VARCHAR(50) NOT NULL UNIQUE,
-        name        VARCHAR(100) NOT NULL,
         description TEXT,
         is_active   BOOLEAN DEFAULT TRUE,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
