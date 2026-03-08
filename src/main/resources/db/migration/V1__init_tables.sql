@@ -200,7 +200,7 @@ CREATE TABLE
 
 CREATE TABLE 
     t_order_statuses (
-        id          SMALLSERIAL PRIMARY KEY,
+        id          UUID PRIMARY KEY DEFAULT gen_random_uuid (),
         code        VARCHAR(50) NOT NULL UNIQUE,
         name        VARCHAR(100) NOT NULL,
         description TEXT,
@@ -213,7 +213,7 @@ CREATE TABLE
 
 CREATE TABLE 
     m_t_order_statuses (
-        id          SMALLSERIAL PRIMARY KEY,
+        id          UUID PRIMARY KEY DEFAULT gen_random_uuid (),
         code        VARCHAR(50) NOT NULL UNIQUE,
         name        VARCHAR(100) NOT NULL,
         description TEXT,
@@ -249,7 +249,7 @@ CREATE TABLE
 
 CREATE TABLE 
     m_order_statuses (
-        id          SMALLSERIAL PRIMARY KEY,
+        id          UUID PRIMARY KEY DEFAULT gen_random_uuid (),
         code        VARCHAR(50) NOT NULL UNIQUE,
         name        VARCHAR(100) NOT NULL,
         description TEXT,
