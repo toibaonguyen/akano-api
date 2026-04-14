@@ -1,0 +1,24 @@
+# ========================================
+# PRODUCTION Environment Configuration
+# ========================================
+# All sensitive values are read from environment variables.
+# Set these in your server/CI-CD pipeline, NOT in this file.
+
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+
+logging:
+  level:
+    root: WARN
+    com.akano: INFO

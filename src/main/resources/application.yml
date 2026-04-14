@@ -1,0 +1,26 @@
+# ========================================
+# Common Configuration (shared across all environments)
+# ========================================
+
+spring:
+  application:
+    name: api
+
+  # Active profile is determined by SPRING_PROFILES_ACTIVE env var
+  # Default to 'local' if not set
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:local}
+
+  # JPA / Hibernate - Common settings
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  # Datasource - Common settings
+  datasource:
+    driver-class-name: org.postgresql.Driver
+
+  # Flyway - Common settings
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
