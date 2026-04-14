@@ -59,7 +59,7 @@
 ## 📦 5. API RESPONSE FORMAT
 ```json
 {
-  "status": "success/error",
+  "success": true,
   "code": 200,
   "message": "Detailed message",
   "errors": {},
