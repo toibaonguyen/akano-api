@@ -44,7 +44,7 @@
 - **Dependency Injection:** Constructor Injection only via `@RequiredArgsConstructor`.
 - **Validation:** Strict `jakarta.validation` in DTOs.
 - **Modern Java:** Use `Stream API`, `Optional`, and `Switch Expressions`.
-- **Naming:** `PascalCase` (Class), `camelCase` (Method/Var), `UPPER_SNAKE` (Const).
+- **Naming:** `PascalCase` (Class), `camelCase` (Method/Var), `UPPER_SNAKE` (Const), `snake_case` (JSON).
 
 ---
 
