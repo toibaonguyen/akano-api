@@ -1,6 +1,10 @@
 # ========================================
 # Common Configuration (shared across all environments)
 # ========================================
+server:
+  error:
+    whitelabel:
+      enabled: false
 
 spring:
   application:
