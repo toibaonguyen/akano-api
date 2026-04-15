@@ -20,7 +20,8 @@ public enum ErrorCode {
 
     // ---- Resource ----
     RESOURCE_NOT_FOUND(4001, "Resource not found", HttpStatus.NOT_FOUND),
-    METHOD_NOT_ALLOWED(4002, "Method not allowed", HttpStatus.METHOD_NOT_ALLOWED),
+    RESOURCE_ALREADY_EXISTS(4002, "Resource already exists", HttpStatus.CONFLICT),
+    METHOD_NOT_ALLOWED(4003, "Method not allowed", HttpStatus.METHOD_NOT_ALLOWED),
 
     // ---- Server ----
     INTERNAL_ERROR(9999, "An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR),
