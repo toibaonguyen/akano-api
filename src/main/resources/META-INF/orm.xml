@@ -1,0 +1,839 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence/orm
+                                     https://jakarta.ee/xml/ns/persistence/orm/orm_3_1.xsd"
+                 version="3.1">
+
+    <description>ORM mappings for BookShop domain entities</description>
+
+    <!-- ==================== -->
+    <!--   USER DOMAIN        -->
+    <!-- ==================== -->
+
+    <!-- Role -->
+    <entity class="com.akano.api.domain.user.Role" access="FIELD">
+        <table name="roles"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="255" nullable="false" unique="true"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- Permission -->
+    <entity class="com.akano.api.domain.user.Permission" access="FIELD">
+        <table name="permissions"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="255" nullable="false" unique="true"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- Account -->
+    <entity class="com.akano.api.domain.user.Account" access="FIELD">
+        <table name="accounts"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="email">
+                <column name="email" length="255" nullable="false" unique="true"/>
+            </basic>
+            <basic name="password">
+                <column name="password" length="255" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- RolePermissionId (Embeddable) -->
+    <embeddable class="com.akano.api.domain.user.RolePermissionId" access="FIELD">
+        <attributes>
+            <basic name="roleId">
+                <column name="role_id" nullable="false"/>
+            </basic>
+            <basic name="permissionId">
+                <column name="permission_id" nullable="false"/>
+            </basic>
+        </attributes>
+    </embeddable>
+
+    <!-- RolePermission -->
+    <entity class="com.akano.api.domain.user.RolePermission" access="FIELD">
+        <table name="role_permission"/>
+        <attributes>
+            <embedded-id name="id"/>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- AccountRoleId (Embeddable) -->
+    <embeddable class="com.akano.api.domain.user.AccountRoleId" access="FIELD">
+        <attributes>
+            <basic name="accountId">
+                <column name="account_id" nullable="false"/>
+            </basic>
+            <basic name="roleId">
+                <column name="role_id" nullable="false"/>
+            </basic>
+        </attributes>
+    </embeddable>
+
+    <!-- AccountRole -->
+    <entity class="com.akano.api.domain.user.AccountRole" access="FIELD">
+        <table name="account_role"/>
+        <attributes>
+            <embedded-id name="id"/>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- UserProfile -->
+    <entity class="com.akano.api.domain.user.UserProfile" access="FIELD">
+        <table name="user_profiles"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="255" nullable="false"/>
+            </basic>
+            <basic name="avatarUrl">
+                <column name="avatar_url" column-definition="TEXT"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- Address -->
+    <entity class="com.akano.api.domain.user.Address" access="FIELD">
+        <table name="addresses"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="accountId">
+                <column name="account_id" nullable="false"/>
+            </basic>
+            <basic name="recipientName">
+                <column name="recipient_name" length="150" nullable="false"/>
+            </basic>
+            <basic name="phone">
+                <column name="phone" length="20" nullable="false"/>
+            </basic>
+            <basic name="street">
+                <column name="street" length="255" nullable="false"/>
+            </basic>
+            <basic name="isDefault">
+                <column name="is_default"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- ==================== -->
+    <!--   CATALOG DOMAIN     -->
+    <!-- ==================== -->
+
+    <!-- Author -->
+    <entity class="com.akano.api.domain.catalog.Author" access="FIELD">
+        <table name="authors"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="255"/>
+            </basic>
+            <basic name="avatarUrl">
+                <column name="avatar_url" column-definition="TEXT"/>
+            </basic>
+            <basic name="bio">
+                <column name="bio" column-definition="TEXT"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- Publisher -->
+    <entity class="com.akano.api.domain.catalog.Publisher" access="FIELD">
+        <table name="publishers"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="255" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- Genre -->
+    <entity class="com.akano.api.domain.catalog.Genre" access="FIELD">
+        <table name="genres"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="255" nullable="false" unique="true"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- Book -->
+    <entity class="com.akano.api.domain.catalog.Book" access="FIELD">
+        <table name="books"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="title">
+                <column name="title" length="255" nullable="false"/>
+            </basic>
+            <basic name="isbn">
+                <column name="isbn" length="20" unique="true"/>
+            </basic>
+            <basic name="description">
+                <column name="description" column-definition="TEXT" nullable="false"/>
+            </basic>
+            <basic name="pageCount">
+                <column name="page_count"/>
+            </basic>
+            <basic name="language">
+                <column name="language" length="50"/>
+            </basic>
+            <basic name="dimensions">
+                <column name="dimensions" length="100"/>
+            </basic>
+            <basic name="weight">
+                <column name="weight" precision="6" scale="2"/>
+            </basic>
+            <basic name="coverType">
+                <column name="cover_type" length="50"/>
+            </basic>
+            <basic name="publishedDate">
+                <column name="published_date" nullable="false"/>
+            </basic>
+            <basic name="publisherId">
+                <column name="publisher_id" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- BookImageId (Embeddable) -->
+    <embeddable class="com.akano.api.domain.catalog.BookImageId" access="FIELD">
+        <attributes>
+            <basic name="bookId">
+                <column name="book_id" nullable="false"/>
+            </basic>
+            <basic name="imageIndex">
+                <column name="image_index" nullable="false"/>
+            </basic>
+        </attributes>
+    </embeddable>
+
+    <!-- BookImage -->
+    <entity class="com.akano.api.domain.catalog.BookImage" access="FIELD">
+        <table name="book_images"/>
+        <attributes>
+            <embedded-id name="id"/>
+            <basic name="url">
+                <column name="url" column-definition="TEXT" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+            <many-to-one name="book" target-entity="com.akano.api.domain.catalog.Book">
+                <join-column name="book_id" referenced-column-name="id" insertable="false" updatable="false"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+
+    <!-- AuthorBookId (Embeddable) -->
+    <embeddable class="com.akano.api.domain.catalog.AuthorBookId" access="FIELD">
+        <attributes>
+            <basic name="authorId">
+                <column name="author_id" nullable="false"/>
+            </basic>
+            <basic name="bookId">
+                <column name="book_id" nullable="false"/>
+            </basic>
+        </attributes>
+    </embeddable>
+
+    <!-- AuthorBook -->
+    <entity class="com.akano.api.domain.catalog.AuthorBook" access="FIELD">
+        <table name="author_book"/>
+        <attributes>
+            <embedded-id name="id"/>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+            <many-to-one name="author" target-entity="com.akano.api.domain.catalog.Author">
+                <join-column name="author_id" referenced-column-name="id" insertable="false" updatable="false"/>
+            </many-to-one>
+            <many-to-one name="book" target-entity="com.akano.api.domain.catalog.Book">
+                <join-column name="book_id" referenced-column-name="id" insertable="false" updatable="false"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+
+    <!-- GenreBookId (Embeddable) -->
+    <embeddable class="com.akano.api.domain.catalog.GenreBookId" access="FIELD">
+        <attributes>
+            <basic name="genreId">
+                <column name="genre_id" nullable="false"/>
+            </basic>
+            <basic name="bookId">
+                <column name="book_id" nullable="false"/>
+            </basic>
+        </attributes>
+    </embeddable>
+
+    <!-- GenreBook -->
+    <entity class="com.akano.api.domain.catalog.GenreBook" access="FIELD">
+        <table name="genre_book"/>
+        <attributes>
+            <embedded-id name="id"/>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+            <many-to-one name="genre" target-entity="com.akano.api.domain.catalog.Genre">
+                <join-column name="genre_id" referenced-column-name="id" insertable="false" updatable="false"/>
+            </many-to-one>
+            <many-to-one name="book" target-entity="com.akano.api.domain.catalog.Book">
+                <join-column name="book_id" referenced-column-name="id" insertable="false" updatable="false"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+
+    <!-- Product -->
+    <entity class="com.akano.api.domain.catalog.Product" access="FIELD">
+        <table name="products"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="inStock">
+                <column name="in_stock" nullable="false"/>
+            </basic>
+            <basic name="price">
+                <column name="price" precision="12" scale="2" nullable="false"/>
+            </basic>
+            <basic name="isActive">
+                <column name="is_active" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+            <many-to-one name="book" target-entity="com.akano.api.domain.catalog.Book">
+                <join-column name="book_id" referenced-column-name="id" nullable="false"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+
+    <!-- ==================== -->
+    <!--   CART DOMAIN         -->
+    <!-- ==================== -->
+
+    <!-- CartItem -->
+    <entity class="com.akano.api.domain.cart.CartItem" access="FIELD">
+        <table name="cart_items"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="accountId">
+                <column name="account_id" nullable="false"/>
+            </basic>
+            <basic name="quantity">
+                <column name="quantity" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+            <many-to-one name="product" target-entity="com.akano.api.domain.catalog.Product">
+                <join-column name="product_id" referenced-column-name="id" nullable="false"/>
+            </many-to-one>
+        </attributes>
+    </entity>
+
+    <!-- ==================== -->
+    <!--   ORDER DOMAIN        -->
+    <!-- ==================== -->
+
+    <!-- MasterOrderStatus -->
+    <entity class="com.akano.api.domain.order.MasterOrderStatus" access="FIELD">
+        <table name="m_order_statuses"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="code">
+                <column name="code" length="50" nullable="false" unique="true"/>
+            </basic>
+            <basic name="description">
+                <column name="description" column-definition="TEXT"/>
+            </basic>
+            <basic name="isActive">
+                <column name="is_active"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- OrderStatus -->
+    <entity class="com.akano.api.domain.order.OrderStatus" access="FIELD">
+        <table name="order_statuses"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="masterStatusId">
+                <column name="m_status_id" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- Order -->
+    <entity class="com.akano.api.domain.order.Order" access="FIELD">
+        <table name="orders"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="accountId">
+                <column name="account_id" nullable="false"/>
+            </basic>
+            <basic name="paymentMethodId">
+                <column name="payment_method_id" nullable="false"/>
+            </basic>
+            <basic name="statusId">
+                <column name="status_id" nullable="false"/>
+            </basic>
+            <basic name="totalAmount">
+                <column name="total_amount" precision="12" scale="2" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- OrderDetail -->
+    <entity class="com.akano.api.domain.order.OrderDetail" access="FIELD">
+        <table name="order_details"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="orderId">
+                <column name="order_id" nullable="false"/>
+            </basic>
+            <basic name="bookId">
+                <column name="book_id" nullable="false"/>
+            </basic>
+            <basic name="quantity">
+                <column name="quantity" nullable="false"/>
+            </basic>
+            <basic name="priceAtPurchase">
+                <column name="price_at_purchase" precision="12" scale="2" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- ==================== -->
+    <!--   PAYMENT DOMAIN      -->
+    <!-- ==================== -->
+
+    <!-- PaymentMethod -->
+    <entity class="com.akano.api.domain.payment.PaymentMethod" access="FIELD">
+        <table name="payment_method"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="code">
+                <column name="code" length="4" nullable="false" unique="true"/>
+            </basic>
+            <basic name="name">
+                <column name="name" length="100" nullable="false" unique="true"/>
+            </basic>
+            <basic name="isActive">
+                <column name="is_active" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- MasterTransactionOrderStatus -->
+    <entity class="com.akano.api.domain.payment.MasterTransactionOrderStatus" access="FIELD">
+        <table name="m_t_order_statuses"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="code">
+                <column name="code" length="50" nullable="false" unique="true"/>
+            </basic>
+            <basic name="description">
+                <column name="description" column-definition="TEXT"/>
+            </basic>
+            <basic name="isActive">
+                <column name="is_active"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- TransactionOrderStatus -->
+    <entity class="com.akano.api.domain.payment.TransactionOrderStatus" access="FIELD">
+        <table name="t_order_statuses"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="mStatusId">
+                <column name="m_status_id" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- TransactionOrder -->
+    <entity class="com.akano.api.domain.payment.TransactionOrder" access="FIELD">
+        <table name="t_order"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="accountId">
+                <column name="account_id" nullable="false"/>
+            </basic>
+            <basic name="paymentMethodId">
+                <column name="payment_method_id" nullable="false"/>
+            </basic>
+            <basic name="statusId">
+                <column name="status_id" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+    <!-- TransactionOrderDetails -->
+    <entity class="com.akano.api.domain.payment.TransactionOrderDetails" access="FIELD">
+        <table name="t_order_details"/>
+        <attributes>
+            <id name="id">
+                <column name="id" column-definition="UUID"/>
+                <generated-value strategy="AUTO"/>
+            </id>
+            <basic name="transactionOrderId">
+                <column name="t_order_id" nullable="false"/>
+            </basic>
+            <basic name="cartItemId">
+                <column name="cart_item_id" nullable="false"/>
+            </basic>
+            <basic name="createdAt">
+                <column name="created_at"/>
+            </basic>
+            <basic name="updatedAt">
+                <column name="updated_at"/>
+            </basic>
+            <basic name="createdBy">
+                <column name="created_by" nullable="false"/>
+            </basic>
+            <basic name="updatedBy">
+                <column name="updated_by" nullable="false"/>
+            </basic>
+        </attributes>
+    </entity>
+
+</entity-mappings>

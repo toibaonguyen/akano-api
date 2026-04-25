@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="
+           http://www.springframework.org/schema/beans 
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+           http://www.springframework.org/schema/tx 
+           http://www.springframework.org/schema/tx/spring-tx.xsd
+           http://www.springframework.org/schema/aop 
+           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 1. Định nghĩa bean CreateBookInformationUseCase và tiêm dependencies qua constructor -->
+    <bean id="createBookInformationUseCase" class="com.akano.api.application.catalog.interactor.CreateBookInfomationInteractor">
+        <constructor-arg ref="bookJPARepository"/>
+        <constructor-arg ref="publisherJPARepository"/>
+        <constructor-arg ref="authorJPARepository"/>
+        <constructor-arg ref="authorBookJPARepository"/>
+        <constructor-arg ref="genreJPARepository"/>
+        <constructor-arg ref="genreBookJPARepository"/>
+    </bean>
+
+    <!-- 2. Cấu hình transaction advice (giống như ý nghĩa của @Transactional) -->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <!-- Áp dụng transaction cho method có tên 'execute' và tự động rollback nếu gặp lỗi -->
+            <tx:method name="execute" propagation="REQUIRED" rollback-for="java.lang.Exception"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!-- 3. Cấu hình AOP để gắn transaction advice vào method execute của CreateBookInfomationInteractor -->
+    <aop:config>
+        <aop:pointcut id="executeMethodPointcut" 
+                      expression="execution(* com.akano.api.application.catalog.interactor.CreateBookInfomationInteractor.execute(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="executeMethodPointcut"/>
+    </aop:config>
+
+</beans>
